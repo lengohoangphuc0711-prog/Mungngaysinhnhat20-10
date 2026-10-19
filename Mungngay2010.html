@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặc San 20/10 - THPT Nguyễn Bỉnh Khiêm</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #c44569;
+            --primary-dark: #8c1d40;
+            --primary-light: #fcecef;
+            --accent: #f7b731;
+            --text-dark: #2c3e50;
+            --text-muted: #636e72;
+            --bg-paper: #fffdfa;
+            --card-bg: #ffffff;
+            --border-color: #f1d3db;
+            --shadow: 0 10px 25px rgba(196, 69, 105, 0.08);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Lora', serif;
+            background-color: var(--bg-paper);
+            color: var(--text-dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        /* Header Tạp Chí */
+        header.masthead {
+            text-align: center;
+            padding: 40px 20px 25px;
+            border-bottom: 2px solid var(--border-color);
+            background: radial-gradient(circle at 50% 100%, #fff0f3 0%, var(--bg-paper) 70%);
+        }
+        .school-info {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--primary-dark);
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+        }
+        .club-signature {
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        .newspaper-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--primary-dark);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .newspaper-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: 5px;
+        }
+
+        /* Navigation */
+        nav.navigation {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 12px 20px;
+        }
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.88rem;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        .nav-link:hover { color: var(--primary); }
+
+        .container {
+            max-width: 1140px;
+            margin: auto;
+            padding: 30px 20px;
+        }
+
+        /* Banner Hero */
+        .hero-banner-wrap {
+            margin-bottom: 40px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            position: relative;
+            background: #ffeef2;
+            text-align: center;
+        }
+        .hero-banner-wrap img {
+            width: 100%;
+            max-height: 460px;
+            object-fit: contain;
+            display: block;
+            margin: auto;
+            cursor: pointer;
+        }
+
+        /* Bài Viết Xã Luận */
+        .article-headline { text-align: center; margin: 25px 0; }
+        .article-badge {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .article-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.8rem, 4vw, 2.7rem);
+            color: var(--primary-dark);
+            margin-top: 15px;
+            font-weight: 700;
+        }
+        .editorial-quote {
+            background: linear-gradient(to right, #fff0f3, #fffafb);
+            border-left: 5px solid var(--primary);
+            padding: 25px 30px;
+            margin: 30px 0;
+            border-radius: 0 16px 16px 0;
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--primary-dark);
+        }
+        .editorial-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+            text-align: justify;
+            font-size: 1.12rem;
+        }
+        .editorial-columns p { margin-bottom: 18px; }
+        .editorial-highlight {
+            font-size: 1.35rem;
+            color: var(--primary);
+            font-weight: 600;
+            text-align: center;
+            margin: 30px auto;
+            padding: 15px;
+            border-top: 1px dashed var(--border-color);
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        /* Tiêu Đề Mục */
+        .section-header {
+            text-align: center;
+            margin: 60px 0 35px;
+            position: relative;
+        }
+        .section-header h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: var(--primary-dark);
+            display: inline-block;
+            background: var(--bg-paper);
+            padding: 0 25px;
+            position: relative;
+            z-index: 2;
+        }
+        .section-header::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: var(--border-color);
+            z-index: 1;
+        }
+        .section-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        /* Góc Tri Ân */
+        .gratitude-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .gratitude-card {
+            background: white;
+            padding: 30px 25px;
+            border-radius: 16px;
+            border-top: 4px solid var(--primary);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        .gratitude-content {
+            font-size: 1rem;
+            font-style: italic;
+            color: #444;
+            margin-bottom: 15px;
+        }
+        .gratitude-author {
+            text-align: right;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--primary-dark);
+        }
+
+        /* Form Gửi Thư */
+        .letter-section {
+            background: linear-gradient(135deg, #fff2f5 0%, #fff9f6 100%);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            margin-top: 50px;
+        }
+        .letter-form-container { max-width: 650px; margin: 0 auto; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e0c2cb;
+            border-radius: 10px;
+            font-family: 'Lora', serif;
+            font-size: 1rem;
+            outline: none;
+        }
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(196, 69, 105, 0.15);
+        }
+        textarea.form-control { min-height: 140px; resize: vertical; }
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 6px 18px rgba(196, 69, 105, 0.35);
+        }
+        .admin-box {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--border-color);
+        }
+        .btn-admin {
+            background: transparent;
+            color: var(--primary-dark);
+            border: 1px solid var(--primary);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* GÓC MÀU SẮC - 12 KHUNG TRANH */
+        .art-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        .art-card {
+            background: var(--card-bg);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .art-img-wrap {
+            height: 380px;
+            position: relative;
+            background: #fdf5f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .art-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.4s ease;
+        }
+        .art-img-wrap img:hover { transform: scale(1.04); }
+
+        /* Nút thay ảnh trực tiếp */
+        .upload-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--primary-dark);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+            transition: 0.2s;
+            z-index: 5;
+        }
+        .upload-badge:hover {
+            background: var(--primary);
+            color: white;
+        }
+        .upload-badge input { display: none; }
+
+        .art-details {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .art-tag {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+        }
+        .art-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin: 6px 0;
+            color: var(--text-dark);
+        }
+        .art-desc {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        /* Hộp thoại Modal & Phóng to ảnh */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-content {
+            background: white;
+            max-width: 800px;
+            width: 100%;
+            max-height: 85vh;
+            border-radius: 16px;
+            padding: 30px;
+            overflow-y: auto;
+            position: relative;
+        }
+        .close-modal {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #888;
+        }
+        #lightboxModal img {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: 8px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: #23181c;
+            color: #d1c7cc;
+            padding: 50px 20px 25px;
+            margin-top: 70px;
+            border-top: 4px solid var(--primary);
+        }
+        .footer-content {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .copyright {
+            text-align: center;
+            font-size: 0.85rem;
+            padding-top: 20px;
+            color: #8b8086;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        @media (max-width: 768px) {
+            .editorial-columns, .footer-content { grid-template-columns: 1fr; }
+            .art-gallery { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        TRƯỜNG THPT NGUYỄN BỈNH KHIÊM — CHƯ SÊ — GIA LAI 
+        <span>|</span> ĐẶC SAN BÁO ĐIỆN TỬ TRI ÂN 20/10
+    </div>
+
+    <header class="masthead">
+        <p class="school-info">Trường THPT Nguyễn Bỉnh Khiêm — Chư Sê — Gia Lai</p>
+        <p class="club-signature">Chuyên san đồng sáng tác: CLB Mĩ Thuật — CLB Văn Học</p>
+        <h1 class="newspaper-title">Hương Sắc Tháng Mười</h1>
+        <p class="newspaper-subtitle">Gói trọn chân tình gửi những đóa hoa ngát hương của đời</p>
+    </header>
+
+    <nav class="navigation">
+        <div class="nav-container">
+            <a href="#xa-luan" class="nav-link">Bài Xã Luận</a>
+            <a href="#goc-tri-an" class="nav-link">Góc Tri Ân</a>
+            <a href="#goc-gui-thu" class="nav-link">Góc Gửi Thư Cho Cô</a>
+            <a href="#goc-mau-sac" class="nav-link">Góc Màu Sắc (12 Tác Phẩm)</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- BANNER ĐẦU BÁO (Tranh 7: Mừng ngày Phụ Nữ Việt Nam 20/10) -->
+        <div class="hero-banner-wrap">
+            <label class="upload-badge">
+                📷 Đổi ảnh Banner <input type="file" accept="image/*" onchange="uploadImage(event, 'bannerImg')">
+            </label>
+            <img id="bannerImg" src="anh7.jpg" alt="Banner 20-10" onclick="showLightbox(this.src)" onerror="showPlaceholder(this, 'Banner Chào Mừng 20/10')">
+        </div>
+
+        <!-- BÀI XÃ LUẬN -->
+        <article id="xa-luan">
+            <div class="article-headline">
+                <span class="article-badge">Xã Luận Báo Tường 20/10</span>
+                <h2 class="article-title">THÁNG MƯỜI – THÁNG CỦA YÊU THƯƠNG VÀ TRI ÂN</h2>
+            </div>
+
+            <div class="editorial-quote">
+                “Có một tình yêu chẳng cần gọi tên, một sự hy sinh chẳng mong hồi đáp, và một vòng tay luôn rộng mở dù ta đã đi qua bao nhiêu giông bão. Đó là tình yêu của những người phụ nữ thân thương trong cuộc đời mỗi chúng ta.”
+            </div>
+
+            <div class="editorial-columns">
+                <div>
+                    <p>Tháng Mười lại về trong sắc thu dịu dàng, mang theo một ngày lễ đặc biệt – <strong>Ngày Phụ nữ Việt Nam 20/10</strong>. Đây là dịp để mỗi người bày tỏ lòng biết ơn, sự trân trọng và tình yêu thương dành cho những người phụ nữ đã và đang góp phần làm nên những điều tốt đẹp trong cuộc sống.</p>
+                    <p>Từ bao đời nay, người phụ nữ Việt Nam luôn là biểu tượng của vẻ đẹp dịu dàng, đức hy sinh, lòng nhân hậu và ý chí kiên cường. Họ có thể là những người mẹ tảo tần, dành cả cuộc đời vun đắp cho gia đình; là những người bà lặng lẽ chở che bằng tình thương vô điều kiện; là những cô giáo tận tụy gieo mầm tri thức; hay những người phụ nữ đang từng ngày nỗ lực khẳng định giá trị bản thân, đóng góp cho sự phát triển của xã hội. Dẫu ở bất kỳ vị trí nào, họ cũng xứng đáng được yêu thương, tôn trọng và ghi nhận.</p>
+                </div>
+                <div>
+                    <p>Ngày 20/10 không chỉ là dịp để trao nhau những bó hoa tươi thắm, những món quà nhỏ hay những lời chúc tốt đẹp. Hơn hết, đây còn là lời nhắc nhở mỗi chúng ta biết trân trọng những điều bình dị thường ngày. Đôi khi, một lời hỏi han chân thành, một cái ôm ấm áp hay sự quan tâm đúng lúc cũng đủ để sưởi ấm trái tim của những người đã luôn dành cho ta những điều tốt đẹp nhất.</p>
+                    <p>Tháng Mười là dịp để gửi lời yêu thương, nhưng trân trọng phụ nữ là điều cần được gìn giữ suốt cả năm tháng. Bởi những điều đẹp đẽ nhất đôi khi không nằm ở món quà lớn lao, mà bắt đầu từ sự chân thành và lòng biết ơn trong mỗi chúng ta.</p>
+                </div>
+            </div>
+
+            <div class="editorial-highlight">
+                Chúc mừng Ngày Phụ nữ Việt Nam 20/10! 🌷
+            </div>
+
+            <p style="text-align: center; max-width: 850px; margin: 0 auto 20px;">
+                Trong nhịp sống hối hả, có những yêu thương vẫn âm thầm hiện diện mà đôi khi chúng ta vô tình xem là điều hiển nhiên. Có những lời cảm ơn chưa kịp nói, những cái ôm chưa kịp trao và những tình cảm vẫn còn được giữ kín trong lòng. Bởi vậy, hãy để ngày 20/10 trở thành cơ hội để chúng ta sống chậm lại một chút, lắng nghe nhiều hơn và can đảm bày tỏ tình cảm với những người phụ nữ mà mình yêu quý.
+            </p>
+            <p style="text-align: center; max-width: 850px; margin: 0 auto; font-weight: 600; color: var(--primary-dark);">
+                Nhân Ngày Phụ nữ Việt Nam 20/10, xin gửi đến toàn thể bà, mẹ, cô giáo và tất cả những người phụ nữ Việt Nam lời chúc tốt đẹp nhất. Chúc mọi người luôn mạnh khỏe, hạnh phúc, bình an; luôn giữ được niềm tin, sự tự tin và ánh sáng riêng của mình. Mong rằng mỗi người phụ nữ đều được yêu thương không chỉ trong một ngày đặc biệt, mà trong từng khoảnh khắc của cuộc đời.
+            </p>
+        </article>
+
+        <!-- GÓC TRI ÂN -->
+        <section id="goc-tri-an">
+            <div class="section-header">
+                <h2>Góc Tri Ân</h2>
+                <p class="section-subtitle">Tiếng lòng của học trò THPT Nguyễn Bỉnh Khiêm gửi gắm qua từng trang viết</p>
+            </div>
+
+            <div class="gratitude-grid">
+                <div class="gratitude-card">
+                    <p class="gratitude-content">"Cảm ơn Cô – người đã gieo những hạt mầm tri thức đầu tiên dưới mái trường Chư Sê đầy nắng gió. Từng nét phấn, từng lời giảng của cô sẽ mãi là hành trang theo em suốt cuộc đời."</p>
+                    <p class="gratitude-author">— Học sinh khối 12, THPT Nguyễn Bỉnh Khiêm</p>
+                </div>
+                <div class="gratitude-card">
+                    <p class="gratitude-content">"Không chỉ là người truyền đạt kiến thức, cô còn như người mẹ hiền thứ hai luôn chở che, bảo ban cho những bồng bột tuổi học trò ngây thơ của chúng em."</p>
+                    <p class="gratitude-author">— Đại diện CLB Văn Học</p>
+                </div>
+                <div class="gratitude-card">
+                    <p class="gratitude-content">"Nhân ngày 20/10, chúng em xin kính chúc tất cả các cô giáo luôn giữ nụ cười rạng rỡ trên môi, tràn đầy sức khỏe và nhiệt huyết dẫn lối bao thế hệ học sinh cập bến bờ tri thức."</p>
+                    <p class="gratitude-author">— CLB Mĩ Thuật & Đoàn Trường</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- GÓC GỬI THƯ CHO CÔ -->
+        <section id="goc-gui-thu">
+            <div class="letter-section">
+                <div class="section-header" style="margin-top: 10px;">
+                    <h2>Góc Gửi Thư Cho Cô</h2>
+                    <p class="section-subtitle">Nơi lưu giữ những dòng tâm sự, lời chúc mộc mạc và chân thành nhất gửi đến cô</p>
+                </div>
+
+                <div class="letter-form-container">
+                    <form id="teacherLetterForm">
+                        <div class="form-group">
+                            <label for="senderName">Họ và tên của bạn (hoặc ghi Ẩn danh):</label>
+                            <input type="text" id="senderName" class="form-control" placeholder="Ví dụ: Một bạn học sinh lớp 12A1..." required>
+                        </div>
+                        <div class="form-group">
+                            <label for="teacherName">Kính gửi đến Cô giáo:</label>
+                            <input type="text" id="teacherName" class="form-control" placeholder="Ví dụ: Cô Lan (Văn), Cô Mai (Toán), Cô giáo chủ nhiệm..." required>
+                        </div>
+                        <div class="form-group">
+                            <label for="letterMessage">Tâm sự / Lời chúc tri ân gửi cô:</label>
+                            <textarea id="letterMessage" class="form-control" placeholder="Viết những lời từ đáy lòng bạn muốn gửi gắm đến cô nhân ngày 20/10..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">💌 Gửi Thư Tri Ân</button>
+                    </form>
+
+                    <!-- KHU VỰC BQT ĐỌC THƯ -->
+                    <div class="admin-box">
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">
+                            🔒 Dành cho Ban Quản Trị website (CLB Mĩ Thuật & CLB Văn Học)
+                        </p>
+                        <button class="btn-admin" onclick="openAdminInbox()">📂 Mở Hòm Thư BQT Nhận Được</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GÓC MÀU SẮC - 12 TRANH MINH HỌA -->
+        <section id="goc-mau-sac">
+            <div class="section-header">
+                <h2>Góc Màu Sắc</h2>
+                <p class="section-subtitle">Không gian triển lãm tranh 20/10 của các bạn học sinh (Bấm vào tranh để phóng to hoặc bấm "Chọn ảnh" để tải trực tiếp từ máy)</p>
+            </div>
+
+            <div class="art-gallery">
+
+                <!-- Tranh 1 -->
+                <div class="art-card">
+                    <div class="art-img-wrap">
+                        <label class="upload-badge">📷 Chọn ảnh <input type="file" accept="image/*" onchange="uploadImage(event, 'artImg1')"></label>
+                        <img id="artImg1" src="anh1.jpg" alt="Tranh 1" onclick="showLightbox(this.src)" onerror="showPlaceholder(this, 'Tranh 1: Ba thế hệ & Trống đồng')">
+                    </div>
+                    <div class="art-details">
+                        <span class="art-tag">Màu Sáp & Trống Đồng Đông Sơn</span>
+                        <h3 class="art-title">Nét Đẹp Ba Thế Hệ</h3>
+                        <p class="art-desc">Từ cội nguồn hoa văn trống đồng linh thiêng đến nét đẹp bình dị của người bà đội nón lá và cô gái nón quai thao thanh lịch.</p>
+                    </div>
+                </div>
+
+                <!-- Tranh 2 -->
+                <div class="art-card">
+                    <div class="art-img-wrap">
+                        <label class="upload-badge">📷 Chọn ảnh <input type="file" accept="image/*" onchange="uploadImage(event, 'artImg2')"></label>
+                        <img id="artImg2" src="anh2.jpg" alt="Tranh 2" onclick="showLightbox(this.src)" onerror="showPlaceholder(this, 'Tranh 2: Áo dài trắng hồ sen')">
+                    </div>
+                    <div class="art-details">
+                        <span class="art-tag">Digital Art Tinh Khôi</span>
+                        <h3 class="art-title">Dáng Sen Áo Dài</h3>
+                        <p class="art-desc">Hình ảnh người phụ nữ trong tà áo dài trắng thanh khiết, mái tóc dài buông lơi bên những đóa sen hồng ngát hương.</p>
+                    </div>
+                </div>
+
+                <!-- Tranh 3 -->
+                <div class="art-card">
+                    <div class="art-img-wrap">
+                        <label class="upload-badge">📷 Chọn ảnh <input type="file" accept="image/*" onchange="uploadImage(event, 'artImg3')"></label>
+                        <img id="artImg3" src="anh3.jpg" alt="Tranh 3" onclick="showLightbox(this.src)" onerror="showPlaceholder(this, 'Tranh 3: Bé mèo ôm hoa')">
+                    </div>
+                    <div class="art-details">
+                        <span class="art-tag">Tranh Minh Họa Dễ Thương</span>
+                        <h3 class="art-title">Bé Mèo Dâng Hoa Tặng Cô</h3>
+                        <p class="art-desc">Nét vẽ đáng yêu, ngộ nghĩnh của chú mèo vàng ôm trọn bó hoa tươi thắm thay cho lời chúc ngọt ngào nhất.</p>
+                    </div>
+                </div>
+
+                <!-- Tranh 4 -->
+                <div class="art-card">
+                    <div class="art-img-wrap">
+                        <label class="upload-badge">📷 Chọn ảnh <input type="file" accept="image/*" onchange="uploadImage(event, 'artImg4')"></label>
+                        <img id="artImg4" src="anh4.jpg" alt="Tranh 4" onclick="showLightbox(this.src)" onerror="showPlaceholder(this, 'Tranh 4: Thuyền hoa sen')">
+                    </div>
+                    <div class="art-details">
+                        <span class="art-tag">Màu Nước & Phong Cách Manga</span>
+                        <h3 class="art-title">Bình Yên Mạn Thuyền Sen</h3>
+                        <p class="art-desc">Ánh mắt trầm tư, dịu dàng bên mạn thuyền hoa sen cùng nét vẽ hóm hỉnh mang lại cảm giác thân thương, gần gũi.</p>
+                    </div>
+                </div>
+
+                <!-- Tranh 5 -->
+                <div class="art-card">
+                    <div class="art-img-wrap">
+                        <label class="upload-badge">📷 Chọn ảnh <input type="file" accept="image/*" onchange="uploadImage(event, 'artImg5')"></label>
+                        <img id="artImg5" src="anh5.jpg" alt="Tranh 5" onclick="showLightbox(this.src)" onerror="showPlaceholder(this, 'Tranh 5: Chân dung nụ cười mùa thu')">
+                    </div>
+                    <div class="art-details">
+                        <span class="art-tag">Digital Painting</span>
+                        <h3 class="art-title">Nụ Cười Tháng Mười</h3>
+                        <p class="art-desc">Ánh mắt ấm áp, rạng rỡ của người phụ nữ nâng niu chùm hoa tím phớt trong những ngày thu ngập tràn yêu thương.</p>
+                    </div>
+                </div>
+
+                <!-- Tranh 6 -->
+                <div class="art-card">
+                    <div class="art-img-wrap">
+                        <label class="upload-badge">📷 Chọn ảnh <input type="file" accept="image/*" onchange="uploadImage(event, 'artImg6')"></label>
+                        <img id="artImg6" src="anh6.jpg" alt="Tranh 6" onclick="showLightbox(this.src)" onerror="showPlaceholder(this, 'Tranh 6: Mẹ và con')">
+                    </div>
+                    <div class="art-details">
+                        <span class="art-tag">Màu Nước Ấm Áp</span>
+                        <h3 class="art-title">Bàn Tay Vỗ Về Của Mẹ</h3>
+                        <p class="art-desc">Cô giáo như người mẹ hiền thứ hai, dịu dàng xoa đầu học trò nhỏ giữa vườn cẩm tú cầu và hướng dương rực rỡ.</p>
+                    </div>
+                </div>
+
+                <!-- Tranh 7 -->
+                <div class="art-card">
+                    <div class="art-img-wrap">
+                        <label class="upload-badge">📷 Chọn ảnh <input type="file" accept="image/*" onchange="uploadImage(event, 'artImg7')"></label>
+                        <img id="artImg7" src="anh7.jpg" alt="Tranh 7" onclick="showLightbox(this.src)" onerror="showPlaceholder(this, 'Tranh 7: Banner Áo dài')">
+                    </div>
+                    <div class="art-details">
+                        <span class="art-tag">Đồ Họa Báo Tường</span>
+                        <h3 class="art-title">Một Nửa Thế Giới Triệu Yêu Thương</h3>
+                        <p class="art-desc">Tà áo dài hồng và vàng tha thướt cùng bức thư tình cảm gửi đến toàn thể chị em phụ nữ Việt Nam.</p>
+                    </div>
+                </div>
+
+                <!-- Tranh 8 -->
+                <div class="art-card">
+                    <div class="art-img-wrap">
+                        <label class="upload-badge">📷 Chọn ảnh <input type="file" accept="image/*" onchange="uploadImage(event, 'artImg8')"></label>
+                        <img id="artImg8" src="anh8.jpg" alt="Tranh 8" onclick="showLightbox(this.src)" onerror="showPlaceholder(this, 'Tranh 8: Ký họa bút chì')">
+                    </div>
+                    <div class="art-details">
+                        <span class="art-tag">Ký Họa Chì Mộc Mạc</span>
+                        <h3 class="art-title">Bánh Kem & Đóa Hồng Tri Ân</h3>
+                        <p class="art-desc">Những nét phác chì tỉ mỉ tái hiện nụ cười trong trẻo, chiếc bánh kem 20/10 và tình cảm thuần khiết của tuổi học trò.</p>
+                    </div>
+                </div>
+
+                <!-- Tranh 9 -->
+                <div class="art-card">
+                    <div class="art-img-wrap">
+                        <label class="upload-badge">📷 Chọn ảnh <input type="file" accept="image/*" onchange="uploadImage(event, 'artImg9')"></label>
+                        <img id="artImg9" src="anh9.jpg" alt="Tranh 9" onclick="showLightbox(this.src)" onerror="showPlaceholder(this, 'Tranh 9: Hoa Loa Kèn')">
+                    </div>
+                    <div class="art-details">
+                        <span class="art-tag">Sáp Dầu Trữ Tình</span>
+                        <h3 class="art-title">Thanh Tao Đóa Loa Kèn Trắng</h3>
+                        <p class="art-desc">Ánh mắt hiền hòa của cô nữ sinh nâng niu bó hoa loa kèn trắng tinh khôi kính dâng lên các cô giáo kính yêu.</p>
+                    </div>
+                </div>
+
+                <!-- Tranh 10 -->
+                <div class="art-card">
+                    <div class="art-img-wrap">
+                        <label class="upload-badge">📷 Chọn ảnh <input type="file" accept="image/*" onchange="uploadImage(event, 'artImg10')"></label>
+                        <img id="artImg10" src="anh10.jpg" alt="Tranh 10" onclick="showLightbox(this.src)" onerror="showPlaceholder(this, 'Tranh 10: 4 Thế hệ & Cờ đỏ')">
+                    </div>
+                    <div class="art-details">
+                        <span class="art-tag">Màu Nước Hào Hùng</span>
+                        <h3 class="art-title">Bốn Thế Hệ Phụ Nữ Việt Nam</h3>
+                        <p class="art-desc">Dưới cờ đỏ sao vàng và đài sen nở rộ, bốn thế hệ phụ nữ tỏa sáng vẻ đẹp anh hùng, bất khuất, trung hậu, đảm đang.</p>
+                    </div>
+                </div>
+
+                <!-- Tranh 11 -->
+                <div class="art-card">
+                    <div class="art-img-wrap">
+                        <label class="upload-badge">📷 Chọn ảnh <input type="file" accept="image/*" onchange="uploadImage(event, 'artImg11')"></label>
+                        <img id="artImg11" src="anh11.jpg" alt="Tranh 11" onclick="showLightbox(this.src)" onerror="showPlaceholder(this, 'Tranh 11: Nón lá sao vàng')">
+                    </div>
+                    <div class="art-details">
+                        <span class="art-tag">Màu Dạ & Nón Lá Tổ Quốc</span>
+                        <h3 class="art-title">Cô Gái Nón Lá Sao Vàng</h3>
+                        <p class="art-desc">Chiếc nón lá đỏ rực ánh sao vàng Tổ quốc kết hợp cùng đóa sen hồng ngát – biểu tượng của tuổi trẻ Chư Sê giàu nhiệt huyết.</p>
+                    </div>
+                </div>
+
+                <!-- Tranh 12 -->
+                <div class="art-card">
+                    <div class="art-img-wrap">
+                        <label class="upload-badge">📷 Chọn ảnh <input type="file" accept="image/*" onchange="uploadImage(event, 'artImg12')"></label>
+                        <img id="artImg12" src="anh12.jpg" alt="Tranh 12" onclick="showLightbox(this.src)" onerror="showPlaceholder(this, 'Tranh 12: Tác Phẩm CLB')">
+                    </div>
+                    <div class="art-details">
+                        <span class="art-tag">Tác Phẩm Đặc Biệt</span>
+                        <h3 class="art-title">Giai Điệu Tháng Mười</h3>
+                        <p class="art-desc">Tác phẩm chung của các thành viên CLB Mĩ Thuật trường THPT Nguyễn Bỉnh Khiêm gửi gắm tình cảm kính dâng thầy cô.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- MODAL BQT ĐỌC THƯ -->
+    <div id="adminInboxModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeAdminInbox()">&times;</span>
+            <h3 style="color: var(--primary-dark); font-family: 'Cinzel', serif; margin-bottom: 10px;">
+                📬 Hòm Thư Tri Ân 20/10 (Dành Cho BQT)
+            </h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">
+                Tất cả các bức thư của học sinh gửi qua web đều được lưu tự động tại đây. Các bạn có thể đọc hoặc xuất file để gửi riêng cho từng thầy cô.
+            </p>
+            <div style="margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="btn-admin" onclick="exportLettersToText()">📥 Tải Tất Cả Thư Về Máy (.txt)</button>
+                <button class="btn-admin" style="color: #e74c3c; border-color: #e74c3c;" onclick="clearAllLetters()">🗑️ Xóa Hòm Thư</button>
+            </div>
+            <div id="letterListContainer"></div>
+        </div>
+    </div>
+
+    <!-- MODAL PHÓNG TO ẢNH (LIGHTBOX) -->
+    <div id="lightboxModal" class="modal" onclick="this.style.display='none'">
+        <img id="lightboxImg" src="" alt="Phóng to ảnh">
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h4 style="font-family: 'Cinzel', serif; color: white; margin-bottom: 10px;">TRƯỜNG THPT NGUYỄN BỈNH KHIÊM — CHƯ SÊ — GIA LAI</h4>
+                <p style="font-size: 0.95rem; line-height: 1.8; margin-bottom: 10px;">
+                    Đặc san điện tử được thực hiện bởi sự phối hợp giữa <strong>CLB Mĩ Thuật</strong> và <strong>CLB Văn Học</strong> nhân kỷ niệm Ngày Phụ nữ Việt Nam 20/10.
+                </p>
+                <p style="font-size: 0.88rem; color: #a49a9f;">Địa chỉ: Huyện Chư Sê, Tỉnh Gia Lai.</p>
+            </div>
+            <div>
+                <h4 style="font-family: 'Cinzel', serif; color: white; margin-bottom: 10px;">CHUYÊN MỤC BÁO</h4>
+                <p style="font-size: 0.9rem; line-height: 2;">
+                    • Bài xã luận 20/10<br>
+                    • Góc Tri Ân người lái đò<br>
+                    • Hòm thư kính gửi cô<br>
+                    • Triển lãm Mĩ Thuật (12 Tác Phẩm)
+                </p>
+            </div>
+        </div>
+        <div class="copyright">
+            © 20/10 THPT Nguyễn Bỉnh Khiêm | CLB Mĩ Thuật & CLB Văn Học
+        </div>
+    </footer>
+
+    <!-- Script Xử Lý -->
+    <script>
+        const STORAGE_KEY = 'NBK_LETTERS_20_10';
+        const IMG_STORAGE_PREFIX = 'NBK_SAVED_IMG_';
+
+        // Tự động nạp lại ảnh người dùng đã từng chọn lên web
+        window.addEventListener('DOMContentLoaded', () => {
+            const imgIds = ['bannerImg', 'artImg1', 'artImg2', 'artImg3', 'artImg4', 'artImg5', 'artImg6', 'artImg7', 'artImg8', 'artImg9', 'artImg10', 'artImg11', 'artImg12'];
+            imgIds.forEach(id => {
+                const savedSrc = localStorage.getItem(IMG_STORAGE_PREFIX + id);
+                if (savedSrc) {
+                    const el = document.getElementById(id);
+                    if (el) el.src = savedSrc;
+                }
+            });
+        });
+
+        // Xử lý khi người dùng bấm nút "Chọn ảnh"
+        function uploadImage(event, targetImgId) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgElement = document.getElementById(targetImgId);
+                    imgElement.src = e.target.result;
+                    // Lưu vào localStorage để lần sau mở web vẫn còn
+                    try {
+                        localStorage.setItem(IMG_STORAGE_PREFIX + targetImgId, e.target.result);
+                    } catch (err) {
+                        console.log("Ảnh dung lượng lớn, hiển thị xem trước phiên này.");
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Tạo hình nền mềm mại khi file chưa tồn tại
+        function showPlaceholder(img, text) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 600;
+            canvas.height = 700;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#fcecef';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#c44569';
+            ctx.font = 'bold 24px Montserrat, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(text, 300, 330);
+            ctx.font = 'italic 18px Lora, serif';
+            ctx.fillStyle = '#636e72';
+            ctx.fillText('(Bấm nút "Chọn ảnh" ở góc trên để tải ảnh vào)', 300, 370);
+            img.src = canvas.toDataURL();
+        }
+
+        // Phóng to ảnh khi nhấp vào
+        function showLightbox(src) {
+            const modal = document.getElementById('lightboxModal');
+            document.getElementById('lightboxImg').src = src;
+            modal.style.display = 'flex';
+        }
+
+        // Quản lý Hòm thư của học sinh gửi cho cô
+        function getLetters() {
+            const data = localStorage.getItem(STORAGE_KEY);
+            return data ? JSON.parse(data) : [];
+        }
+
+        document.getElementById('teacherLetterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const sender = document.getElementById('senderName').value.trim();
+            const teacher = document.getElementById('teacherName').value.trim();
+            const message = document.getElementById('letterMessage').value.trim();
+            const time = new Date().toLocaleString('vi-VN');
+
+            const letters = getLetters();
+            letters.unshift({ id: Date.now(), sender, teacher, message, time });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(letters));
+
+            alert('💌 Bức thư tri ân của bạn đã được gửi thành công đến hòm thư Ban Quản Trị!');
+            this.reset();
+        });
+
+        // BQT Đọc Thư (Mật khẩu mặc định: 2010)
+        function openAdminInbox() {
+            const pwd = prompt("Nhập mã bảo mật của Ban Quản Trị (Mặc định: 2010):");
+            if (pwd === "2010") {
+                renderLetters();
+                document.getElementById('adminInboxModal').style.display = 'flex';
+            } else if (pwd !== null) {
+                alert("Mã bảo mật không chính xác!");
+            }
+        }
+
+        function closeAdminInbox() {
+            document.getElementById('adminInboxModal').style.display = 'none';
+        }
+
+        function renderLetters() {
+            const container = document.getElementById('letterListContainer');
+            const letters = getLetters();
+            if (letters.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #888; padding: 25px;">Chưa có bức thư nào trong hòm thư.</p>';
+                return;
+            }
+
+            let html = '';
+            letters.forEach((item, index) => {
+                html += `
+                    <div style="border-bottom: 1px solid #f1d3db; padding: 15px 0;">
+                        <div style="font-family: Montserrat; font-size: 0.85rem; color: #c44569; font-weight: 600; margin-bottom: 6px;">
+                            #${letters.length - index} | Người gửi: <strong>${escapeHtml(item.sender)}</strong> 
+                            ➔ Gửi cô: <strong style="color: #8c1d40;">${escapeHtml(item.teacher)}</strong>
+                            <span style="color: #999; font-size: 0.8rem; font-weight: normal;">(${item.time})</span>
+                        </div>
+                        <div style="background: #fff8fa; padding: 12px 16px; border-radius: 8px; font-size: 0.98rem; white-space: pre-line;">
+                            ${escapeHtml(item.message)}
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function exportLettersToText() {
+            const letters = getLetters();
+            if (letters.length === 0) return alert("Hòm thư hiện đang trống!");
+
+            let content = "===== TỔNG HỢP THƯ TRI ÂN 20/10 - THPT NGUYỄN BỈNH KHIÊM =====\n\n";
+            letters.forEach((item, index) => {
+                content += `--- Thư #${letters.length - index} ---\nThời gian: ${item.time}\nNgười gửi: ${item.sender}\nGửi đến cô: ${item.teacher}\nNội dung: ${item.message}\n\n`;
+            });
+
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `Danh_Sach_Thu_20_10_THPT_NguyenBinhKhiem.txt`;
+            a.click();
+        }
+
+        function clearAllLetters() {
+            if (confirm("Bạn có chắc chắn muốn xóa tất cả thư đã nhận không?")) {
+                localStorage.removeItem(STORAGE_KEY);
+                renderLetters();
+            }
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/[&<>"']/g, m => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;' })[m]);
+        }
+
+        window.onclick = function(e) {
+            if (e.target == document.getElementById('adminInboxModal')) closeAdminInbox();
+        }
+    </script>
+</body>
+</html>
